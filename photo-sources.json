@@ -1,0 +1,285 @@
+{
+  "arusha-national-park": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Arusha_National_Park_Momella_Lake_Flamingos_83_750_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com"
+  },
+  "mount-meru": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Arusha_National_Park_Tanzania_750_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com"
+  },
+  "lake-duluti": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Duluti/Lake_Duluti_x_65_750_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com"
+  },
+  "tarangire-national-park": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Tarangire_National_Park_Elephants_in_Trangire_River_42_750_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com"
+  },
+  "lake-manyara-national-park": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Lake_Manyara_National_Park_Giraffes_24_750_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com"
+  },
+  "ngorongoro-crater": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Ngorongoro_Crater_View_NCA_750_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com"
+  },
+  "materuni-waterfalls": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Materuni_Waterfalls_03_750_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com"
+  },
+  "cultural-heritage-centre": {
+    "image": "https://culturalheritagetz.com/wp-content/uploads/2026/06/mini_GALLERY.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "culturalheritagetz.com"
+  },
+  "kikuletwa-chemka-hot-springs": {
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Chemka_Hotsrings_4.jpg/1200px-Chemka_Hotsrings_4.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "upload.wikimedia.org"
+  },
+  "mto-wa-mbu-cultural-tourism": {
+    "image": "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1200&q=80",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "images.unsplash.com"
+  },
+  "serval-wildlife": {
+    "image": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1200&q=80",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "images.unsplash.com"
+  },
+  "meserani-snake-park-and-maasai-museum": {
+    "image": "https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=1200&q=80",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "images.unsplash.com"
+  },
+  "serengeti-national-park": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Serengeti_Gnus_7765_550_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com",
+    "download_note": "skipped for local build"
+  },
+  "lake-natron-and-ol-doinyo-lengai": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Lesser_Flamingos_Lake_Natron_01_550_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com",
+    "download_note": "skipped for local build"
+  },
+  "napuru-waterfalls": {
+    "image": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "images.unsplash.com"
+  },
+  "zanzibar-stone-town": {
+    "image": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1400&q=85",
+    "page": "https://www.zanzibartourism.go.tz/",
+    "host": "images.unsplash.com"
+  },
+  "zanzibar-blue-safari": {
+    "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1400&q=85",
+    "page": "https://www.zanzibartourism.go.tz/",
+    "host": "images.unsplash.com"
+  },
+  "dar-es-salaam-city": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Mbudya_Island_Dar-es-Salaam_1_550_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com",
+    "download_note": "skipped for local build"
+  },
+  "arusha-city-heritage": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Arusha_National_Park_Giraffe_750_550shar-50brig-20_c1.jpg",
+    "page": "https://www.arushacc.go.tz/",
+    "host": "www.tanzaniatourism.com",
+    "download_note": "skipped for local build"
+  },
+  "arusha-coffee-farm-tour": {
+    "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1400&q=85",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "images.unsplash.com"
+  },
+  "manyara-rift-valley-viewpoint": {
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Lake_Manyara_panoramic.jpg",
+    "page": "https://storymaps.arcgis.com/stories/10ce7c6dd58f427d8f9748320acb131f",
+    "host": "upload.wikimedia.org"
+  },
+  "mto-wa-mbu-food-and-culture": {
+    "image": "https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=1400&q=85",
+    "page": "https://www.tanzaniatourism.go.tz/",
+    "host": "images.unsplash.com"
+  },
+  "saadani-coast-safari": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Saadani_National_Park_Wami_River_40_550_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniaparks.go.tz/",
+    "host": "www.tanzaniatourism.com",
+    "download_note": "skipped for local build"
+  },
+  "pangani-maziwe-coast": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Pangani_Tanzania_550_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.go.tz/destination/maziwe-marine-reserve",
+    "host": "www.tanzaniatourism.com",
+    "download_note": "skipped for local build"
+  },
+  "amboni-caves-tanga": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Amboni_Caves_Tanga_Tanzania_550_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.go.tz/destination/amboni-caves",
+    "host": "www.tanzaniatourism.com",
+    "download_note": "skipped for local build"
+  },
+  "tanga-city-heritage": {
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/Tanga_bay_sunset.JPG",
+    "page": "https://www.tanga.go.tz/",
+    "host": "upload.wikimedia.org"
+  },
+  "mkomazi-wildlife-tanga": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Mkomazi_National_Park_Dindera_Dam_40_550_550shar-50brig-20_c1.jpg",
+    "page": "https://storymaps.arcgis.com/stories/5349ccd7b3ee4998b189ea293c6f21bc",
+    "host": "www.tanzaniatourism.com",
+    "download_note": "skipped for local build"
+  },
+  "gran-melia-arusha": {
+    "image": "https://dam.melia.com/melia/accounts/f8/4000018/projects/127/assets/4b/13566/a30ee4a07ca7ccdc59356e61c96e6c46-1595540315.jpg?im=RegionOfInterestCrop%3D%282000%2C1333%29%2CregionOfInterest%3D%281476.5%2C984.5%29",
+    "page": "https://www.melia.com/en/hotels/tanzania/arusha/gran-melia-arusha",
+    "host": "dam.melia.com"
+  },
+  "elewana-arusha-coffee-lodge": {
+    "image": "https://wetu.com/ImageHandler/1344x756/13675/arusha_coffee_lodge_-_reception_area_-_copy.jpg",
+    "page": "https://www.elewana.com/lodges/arusha-coffee-lodge/",
+    "host": "wetu.com"
+  },
+  "mount-meru-hotel": {
+    "image": "https://www.mountmeruhotel.co.tz/images/gallery-hotel/01.jpg",
+    "page": "https://www.mountmeruhotel.co.tz/",
+    "host": "www.mountmeruhotel.co.tz"
+  },
+  "four-points-by-sheraton-arusha": {
+    "image": "https://cache.marriott.com/is/image/marriotts7prod/fp-jrofp-jrofp-exterior-day-31414%3AWide-Hor?fit=constrain&wid=900",
+    "page": "https://www.marriott.com/en-us/hotels/jrofp-four-points-arusha-the-arusha-hotel/overview/",
+    "host": "cache.marriott.com"
+  },
+  "kibo-palace-hotel": {
+    "image": "https://kibopalacehotel.com/wp-content/uploads/2022/06/DSC1649-scaled.jpg",
+    "page": "https://kibopalacehotel.com/",
+    "host": "kibopalacehotel.com"
+  },
+  "arusha-serena-hotel-resort-and-spa": {
+    "image": "https://image-tc.galaxy.tf/wijpeg-c5svzdhx8lnmu6af1cik5zsp5/lakedulutiserena-310.jpg",
+    "page": "https://www.serenahotels.com/arusha",
+    "host": "image-tc.galaxy.tf"
+  },
+  "rivertrees-country-inn": {
+    "image": "https://rivertrees.com/wp-content/uploads/2026/04/DSC03584.jpg",
+    "page": "https://rivertrees.com/",
+    "host": "rivertrees.com"
+  },
+  "legendary-lodge-arusha": {
+    "image": "https://cdn.prod.website-files.com/68f6504dbf30f71512836ac2/691aef64d9f565c9510c4223_7e77dfdfcaf991a7b9e3ba7240c2f02b_your-getaway.webp",
+    "page": "https://www.legendaryexpeditions.com/legendary-lodge/",
+    "host": "cdn.prod.website-files.com"
+  },
+  "lake-duluti-lodge": {
+    "image": "https://lakedulutilodge.com/galleries-all/assets/image/1739473525_Duluti%281%29_1.jpg",
+    "page": "https://lakedulutilodge.com/",
+    "host": "lakedulutilodge.com"
+  },
+  "airport-planet-lodge": {
+    "image": "https://planet-lodges.com/wp-content/uploads/2024/11/Copy-of-Gardens-at-night_result.webp",
+    "page": "https://planet-lodges.com/",
+    "host": "planet-lodges.com"
+  },
+  "siringit-villa": {
+    "image": "https://www.siringit.co.tz/swfiles/files/Siringit-Villa-Living-2025-668-1920x1280.webp?nc=1759238128",
+    "page": "https://www.siringit.co.tz/siringit-villa/",
+    "host": "www.siringit.co.tz"
+  },
+  "palace-hotel-arusha": {
+    "image": "https://palacehotelarusha.com/wp-content/uploads/2024/02/Palace-Hotel-exterior-gallery-14.jpg",
+    "page": "https://palacehotelarusha.com/",
+    "host": "palacehotelarusha.com"
+  },
+  "zanzibar-serena-hotel": {
+    "image": "https://image-tc.galaxy.tf/wijpeg-86vvk5fnsvudx8up4f2y3u6c6/mtu-7880-tanzaina-zanzibar.jpg?rotate=0&crop=0%2C250%2C1600%2C628&width=2560",
+    "page": "https://www.serenahotels.com/zanzibar",
+    "host": "image-tc.galaxy.tf",
+    "download_note": "skipped for local build"
+  },
+  "park-hyatt-zanzibar": {
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=85",
+    "page": "https://www.hyatt.com/park-hyatt/en-US/znzph-park-hyatt-zanzibar",
+    "host": "images.unsplash.com"
+  },
+  "zuri-zanzibar": {
+    "image": "https://www.zurizanzibar.com/media-assets/poster-desktop-2-2024-1800px.jpg",
+    "page": "https://www.zurizanzibar.com/",
+    "host": "www.zurizanzibar.com",
+    "download_note": "skipped for local build"
+  },
+  "dar-es-salaam-serena-hotel": {
+    "image": "https://image-tc.galaxy.tf/wijpeg-5orqw2i32s5e5d6vne86ehae/swimming-pool-2.jpg?width=2560",
+    "page": "https://www.serenahotels.com/dar-es-salaam",
+    "host": "image-tc.galaxy.tf",
+    "download_note": "skipped for local build"
+  },
+  "kilimanjaro-wonders-hotel": {
+    "image": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1400&q=85",
+    "page": "https://wetu.com/iBrochure/en/Information/112443/kilimanjaro_wonders_hotel",
+    "host": "images.unsplash.com"
+  },
+  "lake-manyara-serena-safari-lodge": {
+    "image": "https://image-tc.galaxy.tf/wijpeg-1qa6o4pk0n2vfbheo3uujj5qd/lodge-aerial-view-2.jpg?rotate=0&crop=6%2C336%2C1600%2C867&width=2560",
+    "page": "https://www.serenahotels.com/lake-manyara",
+    "host": "image-tc.galaxy.tf",
+    "download_note": "skipped for local build"
+  },
+  "kirurumu-manyara-under-canvas": {
+    "image": "https://static.wixstatic.com/media/d56c8d_07f5f6800a1c404ca6ba2bb5fcb46b90~mv2_d_3000_1996_s_2.jpg",
+    "page": "https://www.kirurumu.net/",
+    "host": "static.wixstatic.com",
+    "download_note": "skipped for local build"
+  },
+  "tanga-beach-resort-spa": {
+    "image": "https://tangabeachresort.com/wp-content/uploads/2024/03/CSN.jpg",
+    "page": "https://tangabeachresort.com/",
+    "host": "tangabeachresort.com",
+    "download_note": "skipped for local build"
+  },
+  "mkomazi-hotels-and-campsite": {
+    "image": "https://karatulodges.com/wp-content/uploads/2026/06/mkomazi-hotels-and-campsit_r.jpg",
+    "page": "https://karatulodges.com/lodges/mkomazi-hotels-and-campsite/",
+    "host": "karatulodges.com",
+    "download_note": "skipped for local build"
+  },
+  "region-arusha": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Olmoti_Crater_NCA_2_1920_300shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com",
+    "downloaded": false,
+    "note": "skipped for local build"
+  },
+  "region-manyara": {
+    "image": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1400&q=85",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "images.unsplash.com",
+    "downloaded": false,
+    "note": "skipped for local build"
+  },
+  "region-tanga": {
+    "image": "https://www.tanzaniatourism.com/images/made/images/uploads/Amani_Nature_Forest_Reserves_in_Usambara_01_550_550shar-50brig-20_c1.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com",
+    "downloaded": false,
+    "note": "skipped for local build"
+  },
+  "hero-arusha-flamingos": {
+    "image": "https://www.tanzaniatourism.com/images/slides/Tanzania_Safaris_Flamingo.jpg",
+    "page": "https://www.tanzaniatourism.com/",
+    "host": "www.tanzaniatourism.com",
+    "downloaded": false,
+    "note": "skipped for local build"
+  }
+}

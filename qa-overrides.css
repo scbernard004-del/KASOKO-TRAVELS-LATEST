@@ -1,0 +1,2 @@
+/* Final QA safety layer */
+html,body{overflow-x:hidden}.card-content p,.service-card p,.region-card p{overflow-wrap:anywhere}
