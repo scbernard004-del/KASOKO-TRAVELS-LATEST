@@ -29,14 +29,32 @@
     }
     return src;
   }
+  function applyTheme() {
+    const root = document.documentElement;
+    root.dataset.theme = state.theme;
+    root.style.colorScheme = state.theme === 'night' ? 'dark' : 'only light';
+    let meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) { meta = document.createElement('meta'); meta.name = 'theme-color'; document.head.appendChild(meta); }
+    meta.content = state.theme === 'night' ? '#07120d' : '#fbfaf6';
+  }
   function applyText() {
     document.documentElement.lang = state.lang;
     $$('[data-i18n]').forEach(el => { el.textContent = text(el.dataset.i18n); });
     $$('[data-i18n-placeholder]').forEach(el => { el.placeholder = text(el.dataset.i18nPlaceholder); });
     $$('[data-bilingual]').forEach(el => { el.textContent = el.dataset[state.lang] || el.dataset.en || ''; });
     const lang = $('[data-lang-toggle]'), theme = $('[data-theme-toggle]');
-    if (lang) { lang.textContent = state.lang === 'en' ? 'SW' : 'EN'; lang.setAttribute('aria-label', state.lang === 'en' ? 'Switch to Kiswahili' : 'Switch to English'); }
-    if (theme) { theme.textContent = state.theme === 'night' ? '☀' : '☾'; theme.setAttribute('aria-label', state.lang === 'en' ? 'Toggle light or dark theme' : 'Badili mwonekano wa mchana au usiku'); }
+    if (lang) {
+      lang.textContent = state.lang === 'en' ? 'SW' : 'EN';
+      lang.setAttribute('aria-label', state.lang === 'en' ? 'Switch to Kiswahili' : 'Switch to English');
+      lang.setAttribute('title', state.lang === 'en' ? 'Kiswahili' : 'English');
+      lang.dataset.currentLanguage = state.lang;
+    }
+    if (theme) {
+      theme.textContent = state.theme === 'night' ? '☀' : '☾';
+      theme.setAttribute('aria-label', state.lang === 'en' ? (state.theme === 'night' ? 'Switch to light mode' : 'Switch to dark mode') : (state.theme === 'night' ? 'Badili kwenda mwonekano wa mchana' : 'Badili kwenda mwonekano wa usiku'));
+      theme.setAttribute('aria-pressed', String(state.theme === 'night'));
+      theme.setAttribute('title', state.theme === 'night' ? 'Light mode' : 'Dark mode');
+    }
   }
   function card(item, kind) {
     const hotel = kind === 'hotel', name = local(item.name), copy = local(item.text) || local(item.description);
@@ -171,8 +189,8 @@
       sections.forEach(section => observer.observe(section));
     }
   }
-  $('[data-theme-toggle]')?.addEventListener('click', () => { state.theme = state.theme === 'night' ? 'day' : 'night'; save('kt-theme', state.theme); document.documentElement.dataset.theme = state.theme; applyText(); });
+  $('[data-theme-toggle]')?.addEventListener('click', () => { state.theme = state.theme === 'night' ? 'day' : 'night'; save('kt-theme', state.theme); applyTheme(); applyText(); });
   $('[data-lang-toggle]')?.addEventListener('click', () => { state.lang = state.lang === 'en' ? 'sw' : 'en'; save('kt-lang', state.lang); renderAll(); document.dispatchEvent(new CustomEvent('kasoko:language', {detail: state.lang})); });
-  document.documentElement.dataset.theme = state.theme;
+  applyTheme();
   renderAll();
 })();

@@ -53,3 +53,17 @@ Remote third-party photos and Google Maps/Fonts still require an internet connec
 - 50 HTML pages checked: no missing local links/assets, no buttons missing type attributes.
 - JavaScript syntax and vercel.json validated.
 - GITHUB-UPDATE.md added for simple replacement deployment.
+
+## Mobile language + theme QA — 2026-09-23
+- Fixed SW/EN language toggle wrapping on narrow Android screens.
+- Language button now keeps a horizontal pill shape from 320px upward and tolerates browser font scaling.
+- Added explicit day and night palettes instead of relying on the browser default color scheme.
+- Light mode now forces a bright cream/white site background on mobile.
+- Dark mode now forces the Kasoko deep-green night palette on mobile.
+- Added early theme bootstrap before the stylesheet to prevent incorrect-theme flashes.
+- Added color-scheme and theme-color integration for mobile browsers.
+- Theme preference remains stored in localStorage and follows the visitor across all pages.
+- Verified all 50 HTML pages contain both controls and the early theme bootstrap.
+- Verified local asset references: 0 missing.
+- JavaScript syntax checks: passed.
+- CSS parser errors: 0.
