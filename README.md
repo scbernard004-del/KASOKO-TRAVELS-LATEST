@@ -6,9 +6,11 @@ Static, mobile-first Arusha-based Tanzania travel site for GitHub and Vercel. It
 
 Open `index.html` for a static content preview, or serve this folder with any simple static server. The booking form falls back to a WhatsApp message or downloadable draft until the API environment variables are configured.
 
-## Booking endpoint
+## Private booking + interaction notifications
 
-Set `BOOKING_WEBHOOK_URL` to an HTTPS Google Apps Script `/exec` endpoint and `BOOKING_WEBHOOK_SECRET` to the same private secret used by `google-apps-script-alerts-template.txt`. The endpoint must return `{ "ok": true, "status": "request_received", "reference": "KST-..." }`. The site never claims a room, ticket or itinerary is confirmed until Kasoko checks live availability.
+The website sends completed booking requests and selected high-value interactions through private Vercel API routes. The owner's alert email is stored only in Google Apps Script Script Properties, never in public browser code.
+
+Set `BOOKING_WEBHOOK_URL` to the HTTPS Google Apps Script `/exec` endpoint and `BOOKING_WEBHOOK_SECRET` to the same private secret used by `google-apps-script-alerts-template.txt`. Follow `NOTIFICATIONS-SETUP.md` for the one-time activation. The site never claims a room, ticket or itinerary is confirmed until Kasoko checks live availability.
 
 ## Editing content
 

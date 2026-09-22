@@ -1,25 +1,37 @@
 /*
-  Kasoko Safaris & Tours — private booking receiver
+  Kasoko Safaris & Tours — PRIVATE notification receiver
 
-  This receiver saves each request to a private Google Sheet and then sends an
-  optional owner alert. The public website only receives request_received after
-  the row has been saved. It never marks a supplier booking or payment as
-  confirmed.
+  What it does
+  • Saves every completed booking request in a private Google Sheet.
+  • Emails the owner immediately for every completed booking request.
+  • Saves and emails high-value website interactions: booking CTA clicks,
+    booking form starts, phone clicks and WhatsApp clicks.
+  • The alert email address is NEVER stored in public HTML or JavaScript.
 
-  Setup:
+  PRIVATE SETUP
   1. Create a private Google Sheet and copy its ID from the URL.
-  2. Create an Apps Script project at script.google.com and paste this file.
-  3. Project Settings > Script properties:
+  2. Open script.google.com, create a project, and paste this entire file.
+  3. Project Settings > Script properties, add:
        SHEET_ID       = your private spreadsheet ID
-       ALERT_EMAIL    = your private alert email
-       WEBHOOK_SECRET = a long random secret
-  4. Run setupSheet once from the Apps Script editor and approve permissions.
-  5. Deploy > New deployment > Web app; execute as you; access: Anyone.
-  6. Copy the /exec URL to Vercel as BOOKING_WEBHOOK_URL and use the same
-     WEBHOOK_SECRET value as BOOKING_WEBHOOK_SECRET.
+       ALERT_EMAIL    = your private notification Gmail address
+       WEBHOOK_SECRET = a long random secret (32+ random characters)
+  4. Run setupSheets once and approve the Google permissions.
+  5. Deploy > New deployment > Web app:
+       Execute as: Me
+       Who has access: Anyone
+  6. Copy the deployment /exec URL.
+  7. In Vercel > Project > Settings > Environment Variables, add:
+       BOOKING_WEBHOOK_URL    = the Google Apps Script /exec URL
+       BOOKING_WEBHOOK_SECRET = the exact same WEBHOOK_SECRET
+     Add both for Production (and Preview if you test preview deployments).
+  8. Redeploy the website.
+
+  Security note
+  Keep ALERT_EMAIL and WEBHOOK_SECRET only in Google Script Properties.
+  Do not paste them into config.js, HTML, GitHub README, or browser code.
 */
 
-var HEADERS = [
+var BOOKING_HEADERS = [
   'received_at', 'reference', 'status', 'language', 'service', 'destination',
   'origin', 'start_date', 'end_date', 'adults', 'children', 'child_ages',
   'infants', 'rooms', 'room_type', 'meal_plan', 'travel_class', 'operator',
@@ -27,37 +39,143 @@ var HEADERS = [
   'contact_method', 'notes', 'email_status', 'booking_json'
 ];
 
+var INTERACTION_HEADERS = [
+  'received_at', 'event_id', 'action', 'page', 'page_title', 'label', 'target',
+  'language', 'service', 'item', 'occurred_at', 'email_status'
+];
+
 function json_(value) {
   return ContentService.createTextOutput(JSON.stringify(value))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-function getSheet_() {
+function getSpreadsheet_() {
   var id = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
   if (!id) throw new Error('SHEET_ID missing');
-  var ss = SpreadsheetApp.openById(id);
-  var sheet = ss.getSheetByName('Bookings') || ss.insertSheet('Bookings');
-  if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
+  return SpreadsheetApp.openById(id);
+}
+
+function getSheet_(name, headers) {
+  var ss = getSpreadsheet_();
+  var sheet = ss.getSheetByName(name) || ss.insertSheet(name);
+  if (sheet.getLastRow() === 0) sheet.appendRow(headers);
   return sheet;
 }
 
-function setupSheet() {
-  var sheet = getSheet_();
-  if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
-  return 'Bookings sheet ready';
+function setupSheets() {
+  getSheet_('Bookings', BOOKING_HEADERS);
+  getSheet_('Interactions', INTERACTION_HEADERS);
+  return 'Kasoko Bookings + Interactions sheets ready';
 }
 
-function findReference_(sheet, reference) {
+function findValueInColumn_(sheet, column, value) {
   if (sheet.getLastRow() < 2) return 0;
-  var values = sheet.getRange(2, 2, sheet.getLastRow() - 1, 1).getValues();
+  var values = sheet.getRange(2, column, sheet.getLastRow() - 1, 1).getValues();
   for (var i = 0; i < values.length; i++) {
-    if (String(values[i][0]) === reference) return i + 2;
+    if (String(values[i][0]) === String(value)) return i + 2;
   }
   return 0;
 }
 
+function alertEmail_() {
+  return PropertiesService.getScriptProperties().getProperty('ALERT_EMAIL') || '';
+}
+
+function sendAlert_(subject, body) {
+  var to = alertEmail_();
+  if (!to) return 'not_configured';
+  try {
+    MailApp.sendEmail({to: to, subject: subject, body: body, name: 'Kasoko Website Alerts'});
+    return 'sent';
+  } catch (err) {
+    return 'failed';
+  }
+}
+
+function interactionName_(action) {
+  var names = {
+    booking_cta: 'Booking button clicked',
+    booking_started: 'Booking form started',
+    phone_click: 'Phone number clicked',
+    whatsapp_click: 'WhatsApp opened'
+  };
+  return names[action] || action || 'Website interaction';
+}
+
+function handleInteraction_(body) {
+  var event = body.event || {};
+  var eventId = String(body.eventId || '');
+  var allowed = ['booking_cta', 'booking_started', 'phone_click', 'whatsapp_click'];
+  if (!eventId || allowed.indexOf(String(event.action || '')) === -1) {
+    return json_({ok: false, error: 'invalid_interaction'});
+  }
+
+  var sheet = getSheet_('Interactions', INTERACTION_HEADERS);
+  if (findValueInColumn_(sheet, 2, eventId)) {
+    return json_({ok: true, status: 'interaction_received', eventId: eventId});
+  }
+
+  var actionName = interactionName_(String(event.action || ''));
+  var bodyText = [
+    'A visitor made a high-value interaction on the Kasoko website.',
+    '',
+    'Action: ' + actionName,
+    'Page: ' + String(event.page || ''),
+    'Page title: ' + String(event.title || ''),
+    'Clicked / entered: ' + String(event.label || ''),
+    'Target: ' + String(event.target || ''),
+    'Service: ' + String(event.service || ''),
+    'Item: ' + String(event.item || ''),
+    'Language: ' + String(event.language || 'en'),
+    'Time: ' + String(event.occurredAt || new Date().toISOString()),
+    '',
+    'This alert contains no hidden owner email or secret from the public website.'
+  ].join('\n');
+
+  var emailStatus = sendAlert_('Kasoko website: ' + actionName, bodyText);
+  sheet.appendRow([
+    new Date(), eventId, String(event.action || ''), String(event.page || ''),
+    String(event.title || ''), String(event.label || ''), String(event.target || ''),
+    String(event.language || 'en'), String(event.service || ''), String(event.item || ''),
+    String(event.occurredAt || ''), emailStatus
+  ]);
+
+  return json_({ok: true, status: 'interaction_received', eventId: eventId});
+}
+
+function handleBooking_(body) {
+  if (!body.reference || !body.booking) return json_({ok: false, error: 'invalid_booking'});
+  var sheet = getSheet_('Bookings', BOOKING_HEADERS);
+  var reference = String(body.reference);
+  if (findValueInColumn_(sheet, 2, reference)) {
+    return json_({ok: true, status: 'request_received', reference: reference});
+  }
+
+  var booking = body.booking;
+  var row = [
+    new Date(), reference, 'request_received', String(body.language || 'en'),
+    booking.service || '', booking.destination || '', booking.origin || '',
+    booking.startDate || '', booking.endDate || '', booking.adults || '', booking.children || '',
+    booking.childAges || '', booking.infants || '', booking.rooms || '', booking.roomType || '',
+    booking.mealPlan || '', booking.travelClass || '', booking.operator || '', booking.time || '',
+    booking.style || '', (booking.addons || []).join(', '), booking.currency || '', booking.budget || '',
+    booking.name || '', booking.phone || '', booking.email || '', booking.contactMethod || '',
+    booking.notes || '', 'pending', JSON.stringify(booking)
+  ];
+  sheet.appendRow(row);
+
+  var summary = (body.summary || []).map(function(pair) { return pair[0] + ': ' + pair[1]; }).join('\n');
+  var emailStatus = sendAlert_(
+    'Kasoko NEW booking request ' + reference,
+    'A new booking/order request was received.\n\nReference: ' + reference + '\n\n' + summary +
+    '\n\nAvailability and price still require Kasoko confirmation.'
+  );
+  sheet.getRange(sheet.getLastRow(), 29).setValue(emailStatus);
+  return json_({ok: true, status: 'request_received', reference: reference});
+}
+
 function doGet() {
-  return json_({ok: true, service: 'kasoko-booking-receiver'});
+  return json_({ok: true, service: 'kasoko-private-notification-receiver'});
 }
 
 function doPost(e) {
@@ -67,43 +185,9 @@ function doPost(e) {
     var props = PropertiesService.getScriptProperties();
     var secret = props.getProperty('WEBHOOK_SECRET');
     var body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
-    if (!secret || body.secret !== secret || !body.reference || !body.booking) {
-      return json_({ok: false, error: 'unauthorized'});
-    }
-    var sheet = getSheet_();
-    var existingRow = findReference_(sheet, String(body.reference));
-    if (existingRow) return json_({ok: true, status: 'request_received', reference: String(body.reference)});
-
-    var booking = body.booking;
-    var row = [
-      new Date(), String(body.reference), 'request_received', String(body.language || 'en'),
-      booking.service || '', booking.destination || '', booking.origin || '',
-      booking.startDate || '', booking.endDate || '', booking.adults || '', booking.children || '',
-      booking.childAges || '', booking.infants || '', booking.rooms || '', booking.roomType || '',
-      booking.mealPlan || '', booking.travelClass || '', booking.operator || '', booking.time || '',
-      booking.style || '', (booking.addons || []).join(', '), booking.currency || '', booking.budget || '',
-      booking.name || '', booking.phone || '', booking.email || '', booking.contactMethod || '',
-      booking.notes || '', 'pending', JSON.stringify(booking)
-    ];
-    sheet.appendRow(row);
-
-    var emailStatus = 'not_configured';
-    var to = props.getProperty('ALERT_EMAIL');
-    if (to) {
-      try {
-        var summary = (body.summary || []).map(function(pair) { return pair[0] + ': ' + pair[1]; }).join('\n');
-        MailApp.sendEmail({
-          to: to,
-          subject: 'Kasoko booking request ' + body.reference,
-          body: 'A new request was saved to the private Bookings sheet.\n\nReference: ' + body.reference + '\n\n' + summary + '\n\nAvailability and price still require Kasoko confirmation.'
-        });
-        emailStatus = 'sent';
-      } catch (mailError) {
-        emailStatus = 'failed';
-      }
-    }
-    sheet.getRange(sheet.getLastRow(), 29).setValue(emailStatus);
-    return json_({ok: true, status: 'request_received', reference: String(body.reference)});
+    if (!secret || body.secret !== secret) return json_({ok: false, error: 'unauthorized'});
+    if (body.kind === 'interaction') return handleInteraction_(body);
+    return handleBooking_(body);
   } catch (err) {
     return json_({ok: false, error: 'receiver_error'});
   } finally {

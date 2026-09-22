@@ -40,3 +40,16 @@ Remote third-party photos and Google Maps/Fonts still require an internet connec
 - Added responsive sizing down to narrow 390px screens and short landscape phone viewports.
 - Homepage section navigation updates as visitors move through Safaris, Tours, Locations, Hotels and Tickets.
 - Static QA: 50 pages checked; 0 missing local links/assets; 0 duplicate IDs; JavaScript syntax checks passed.
+
+## 2026-09-22 performance + duplicate-image QA
+- Footer developer credit updated on all 50 HTML pages to Isaac Sabuni with 0746584214.
+- Public notification privacy preserved; the owner notification address is not embedded in public HTML/JS/CSS/config.
+- Local full-size WebP photos re-encoded efficiently; total dropped from 4,298,030 bytes to 3,056,702 bytes.
+- Added 20 lightweight 720px WebP card thumbnails so cards avoid loading full-size local photos.
+- Homepage LCP hero image is preloaded and kept local.
+- Catalog gallery sources de-duplicated globally; 48 item primary photos remain unique.
+- Homepage image picker prevents repeated content photos across hero, regions, safari, tour and hotel cards.
+- Detail galleries show each photo once at a time by swapping the selected thumbnail with the main image.
+- 50 HTML pages checked: no missing local links/assets, no buttons missing type attributes.
+- JavaScript syntax and vercel.json validated.
+- GITHUB-UPDATE.md added for simple replacement deployment.

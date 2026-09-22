@@ -2,6 +2,7 @@
 window.KASOKO_CONFIG = Object.freeze({
   brand: 'Kasoko Safaris & Tours',
   bookingEndpoint: '/api/bookings',
+  interactionEndpoint: '/api/interactions',
   contacts: [
     { label: '0789 515 769', international: '255789515769' },
     { label: '0744 355 769', international: '255744355769' },

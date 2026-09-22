@@ -58,8 +58,7 @@ window.KASOKO_CATALOG = {
       },
       "images": [
         "assets/photos/mount-meru.webp",
-        "https://images.unsplash.com/photo-1564510714747-69c3bc1fab41?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1200&q=80"
+        "https://images.unsplash.com/photo-1564510714747-69c3bc1fab41?auto=format&fit=crop&w=1200&q=80"
       ],
       "badge": {
         "en": "4,566 m peak",
@@ -283,8 +282,7 @@ window.KASOKO_CATALOG = {
       },
       "images": [
         "assets/photos/materuni-waterfalls.webp",
-        "https://www.tanzaniatourism.com/images/made/images/uploads/Materuni_Waterfalls_01_750_550shar-50brig-20_c1.jpg",
-        "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80"
+        "https://www.tanzaniatourism.com/images/made/images/uploads/Materuni_Waterfalls_01_750_550shar-50brig-20_c1.jpg"
       ],
       "badge": {
         "en": "Waterfall + coffee",
@@ -417,9 +415,7 @@ window.KASOKO_CATALOG = {
         "sw": "Utalii wa Utamaduni Mto wa Mbu"
       },
       "images": [
-        "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80"
+        "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1200&q=80"
       ],
       "badge": {
         "en": "Village culture",
@@ -463,8 +459,7 @@ window.KASOKO_CATALOG = {
       },
       "images": [
         "https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80"
+        "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=1200&q=80"
       ],
       "badge": {
         "en": "Wildlife resort",
@@ -507,9 +502,7 @@ window.KASOKO_CATALOG = {
         "sw": "Meserani Snake Park na Makumbusho ya Maasai"
       },
       "images": [
-        "https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=80"
+        "https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=1200&q=80"
       ],
       "badge": {
         "en": "Culture stop",
@@ -553,8 +546,7 @@ window.KASOKO_CATALOG = {
       },
       "images": [
         "https://www.tanzaniatourism.com/images/made/images/uploads/Serengeti_Gnus_7765_550_550shar-50brig-20_c1.jpg",
-        "https://images.unsplash.com/photo-1504432842672-1a79f78e4084?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1535941339077-2dd1c7963098?auto=format&fit=crop&w=1200&q=80"
+        "https://images.unsplash.com/photo-1504432842672-1a79f78e4084?auto=format&fit=crop&w=1200&q=80"
       ],
       "badge": {
         "en": "Great Migration",
@@ -597,9 +589,7 @@ window.KASOKO_CATALOG = {
         "sw": "Lake Natron na Ol Doinyo Lengai"
       },
       "images": [
-        "https://www.tanzaniatourism.com/images/made/images/uploads/Lesser_Flamingos_Lake_Natron_01_550_550shar-50brig-20_c1.jpg",
-        "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1200&q=80"
+        "https://www.tanzaniatourism.com/images/made/images/uploads/Lesser_Flamingos_Lake_Natron_01_550_550shar-50brig-20_c1.jpg"
       ],
       "badge": {
         "en": "Adventure route",
@@ -642,9 +632,7 @@ window.KASOKO_CATALOG = {
         "sw": "Maporomoko ya Napuru"
       },
       "images": [
-        "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80"
+        "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80"
       ],
       "badge": {
         "en": "Local waterfall",

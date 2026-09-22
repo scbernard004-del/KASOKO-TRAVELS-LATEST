@@ -10,6 +10,25 @@
   const local = value => value && typeof value === 'object' ? (value[state.lang] || value.en || '') : (value || '');
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const overviewPhoto = key => C.overviewPhotos?.[key] || `assets/photos/${key}.webp`;
+  const canonicalImage = src => String(src || '').replace('assets/photos/thumbs/', 'assets/photos/');
+  let pageImageUsed = new Set();
+  function resetPageImageUse() {
+    pageImageUsed = new Set($$('img[src]').filter(img => !img.closest('#region-grid,#safari-grid,#tour-grid,#hotel-grid,.detail-photo')).map(img => canonicalImage(img.getAttribute('src'))).filter(src => src && !src.includes('logo-mark.svg')));
+  }
+  function pickImage(images = []) {
+    const unique = [...new Set(images.filter(Boolean).map(canonicalImage))];
+    const chosen = unique.find(src => !pageImageUsed.has(src)) || unique[0] || '';
+    if (chosen) pageImageUsed.add(chosen);
+    return chosen;
+  }
+  function cardImage(src) {
+    if (!src) return '';
+    if (src.startsWith('assets/photos/')) return src.replace('assets/photos/', 'assets/photos/thumbs/');
+    if (src.includes('images.unsplash.com/')) {
+      try { const u = new URL(src); u.searchParams.set('w', '800'); u.searchParams.set('q', '72'); u.searchParams.set('auto', 'format'); u.searchParams.set('fit', 'crop'); return u.toString(); } catch { return src; }
+    }
+    return src;
+  }
   function applyText() {
     document.documentElement.lang = state.lang;
     $$('[data-i18n]').forEach(el => { el.textContent = text(el.dataset.i18n); });
@@ -23,7 +42,8 @@
     const hotel = kind === 'hotel', name = local(item.name), copy = local(item.text) || local(item.description);
     const path = (hotel ? 'hotel-' : 'destination-') + item.id + '.html';
     const service = hotel ? 'hotel' : item.service;
-    return `<article class="card"><a class="card-image" href="${path}" aria-label="${esc(name)}"><img loading="lazy" decoding="async" width="900" height="600" src="${esc(item.images[0])}" alt="${esc(item.photoAlt || name)}"><span class="card-badge">${esc(hotel ? local(item.region) : local(item.badge))}</span></a><div class="card-content"><span class="card-meta">${esc(local(item.location))}</span><h3><a href="${path}">${esc(name)}</a></h3><p>${esc(copy)}</p><div class="card-foot"><strong>${esc(local(item.price))}</strong><a class="text-link" href="booking.html?service=${service}&amp;item=${item.id}">${state.lang === 'sw' ? 'Omba →' : 'Request →'}</a></div></div></article>`;
+    const image = pickImage(item.images || []);
+    return `<article class="card"><a class="card-image" href="${path}" aria-label="${esc(name)}"><img loading="lazy" decoding="async" width="900" height="600" src="${esc(cardImage(image))}" alt="${esc(item.photoAlt || name)}"><span class="card-badge">${esc(hotel ? local(item.region) : local(item.badge))}</span></a><div class="card-content"><span class="card-meta">${esc(local(item.location))}</span><h3><a href="${path}">${esc(name)}</a></h3><p>${esc(copy)}</p><div class="card-foot"><strong>${esc(local(item.price))}</strong><a class="text-link" href="booking.html?service=${service}&amp;item=${item.id}">${state.lang === 'sw' ? 'Omba →' : 'Request →'}</a></div></div></article>`;
   }
   const regions = [
     ['arusha', 'Arusha', 'Arusha, Tanzania', 'Our base for city days, Mount Meru, coffee, culture and northern safaris.', 'Msingi wetu kwa ziara za jiji, Mlima Meru, kahawa, utamaduni na safari za kaskazini.'],
@@ -32,7 +52,11 @@
   ];
   function renderRegions() {
     const el = $('#region-grid'); if (!el) return;
-    el.innerHTML = regions.map(r => `<a class="region-card" href="booking.html?service=custom&amp;region=${encodeURIComponent(r[2])}"><img loading="lazy" decoding="async" width="1200" height="800" src="${esc(overviewPhoto('region-' + r[0]))}" alt="${r[1]}"><div><span>${state.lang === 'sw' ? 'Eneo la huduma' : 'Service region'}</span><h3>${r[1]}</h3><p>${r[state.lang === 'sw' ? 4 : 3]}</p><b>${state.lang === 'sw' ? 'Panga safari →' : 'Plan this region →'}</b></div></a>`).join('');
+    el.innerHTML = regions.map(r => {
+      const regional = [...C.destinations, ...C.hotels].filter(item => String(item.region || '').includes(r[1])).flatMap(item => item.images || []);
+      const image = pickImage([overviewPhoto('region-' + r[0]), ...regional]);
+      return `<a class="region-card" href="booking.html?service=custom&amp;region=${encodeURIComponent(r[2])}"><img loading="lazy" decoding="async" width="1200" height="800" src="${esc(cardImage(image))}" alt="${r[1]}"><div><span>${state.lang === 'sw' ? 'Eneo la huduma' : 'Service region'}</span><h3>${r[1]}</h3><p>${r[state.lang === 'sw' ? 4 : 3]}</p><b>${state.lang === 'sw' ? 'Panga safari →' : 'Plan this region →'}</b></div></a>`;
+    }).join('');
   }
   function renderServices() {
     const el = $('#service-grid'); if (!el) return;
@@ -46,7 +70,7 @@
     const items = collection(kind), options = ['all', ...new Set(items.map(item => item.region))];
     if (filters) {
       filters.innerHTML = options.map(region => `<button type="button" class="filter ${state[kind] === region ? 'active' : ''}" aria-pressed="${state[kind] === region}" data-region="${esc(region)}">${esc(region === 'all' ? (state.lang === 'sw' ? 'Zote' : 'All') : region)}</button>`).join('');
-      $$('button', filters).forEach(button => button.addEventListener('click', () => { state[kind] = button.dataset.region; renderCollection(kind); }));
+      $$('button', filters).forEach(button => button.addEventListener('click', () => { state[kind] = button.dataset.region; renderAll(); }));
     }
     const visible = items.filter(item => state[kind] === 'all' || item.region === state[kind]);
     grid.innerHTML = visible.map(item => card(item, kind === 'hotel' ? 'hotel' : 'destination')).join('');
@@ -63,19 +87,25 @@
     const sourceLink = $('.detail-actions a[data-i18n="detail.official"]'); if (sourceLink && kind === 'destination') sourceLink.textContent = state.lang === 'sw' ? 'Fungua chanzo cha eneo' : 'Open destination source';
 
     const photoBox = $('.detail-photo');
-    const images = (item.images || []).filter(Boolean).slice(0, 5);
+    const images = [...new Set((item.images || []).filter(Boolean))].slice(0, 5);
     if (photoBox && images.length) {
       const alt = esc(local(item.name));
-      photoBox.classList.toggle('has-gallery', images.length > 1);
-      photoBox.innerHTML = `<img class="detail-main-image" alt="${alt}" decoding="async" src="${esc(images[0])}">${images.length > 1 ? `<div class="detail-thumbs">${images.map((src, i) => `<button type="button" class="${i === 0 ? 'active' : ''}" data-gallery-src="${esc(src)}" aria-label="${state.lang === 'sw' ? 'Picha' : 'Photo'} ${i+1}"><img alt="" loading="lazy" decoding="async" src="${esc(src)}"></button>`).join('')}</div>` : ''}`;
+      const thumbs = images.slice(1);
+      photoBox.classList.toggle('has-gallery', thumbs.length > 0);
+      photoBox.innerHTML = `<img class="detail-main-image" alt="${alt}" fetchpriority="high" decoding="async" src="${esc(images[0])}">${thumbs.length ? `<div class="detail-thumbs">${thumbs.map((src, i) => `<button type="button" data-gallery-src="${esc(src)}" aria-label="${state.lang === 'sw' ? 'Picha' : 'Photo'} ${i+2}"><img alt="" loading="lazy" decoding="async" src="${esc(src)}"></button>`).join('')}</div>` : ''}`;
       const main = $('.detail-main-image', photoBox);
       $$('[data-gallery-src]', photoBox).forEach(btn => btn.addEventListener('click', () => {
-        if (main) main.src = btn.dataset.gallerySrc;
-        $$('[data-gallery-src]', photoBox).forEach(b => b.classList.toggle('active', b === btn));
+        if (!main) return;
+        const oldMain = main.getAttribute('src');
+        const next = btn.dataset.gallerySrc;
+        main.setAttribute('src', next);
+        btn.dataset.gallerySrc = oldMain;
+        const thumb = $('img', btn); if (thumb) thumb.setAttribute('src', oldMain);
       }));
     }
   }
   function renderAll() {
+    resetPageImageUse();
     renderServices(); renderRegions(); ['safari', 'tour', 'hotel'].forEach(renderCollection); renderDetail(); applyText();
     const ticketGrid = $('#ticket-grid');
     if (ticketGrid) ticketGrid.innerHTML = [['flight','✈️','Flights','Ndege'],['bus','🚌','Buses','Mabasi'],['ferry','⛴️','Ferries','Feri'],['train','🚆','Trains','Treni']].map(x => `<a class="ticket-card" href="booking.html?service=${x[0]}"><span aria-hidden="true">${x[1]}</span><b>${x[state.lang === 'sw' ? 3 : 2]}</b><small>${state.lang === 'sw' ? 'Omba njia na tarehe →' : 'Request route and date →'}</small></a>`).join('');
@@ -86,9 +116,9 @@
       if (img.dataset.fallbackBound) return;
       img.dataset.fallbackBound = '1';
       img.addEventListener('error', () => {
-        if (img.dataset.fallbackUsed) { img.style.visibility = 'hidden'; return; }
         img.dataset.fallbackUsed = '1';
-        img.src = 'assets/photos/arusha-national-park.webp';
+        img.style.visibility = 'hidden';
+        img.closest('.card-image,.region-card,.detail-photo,.hero-main-photo,.hero-side-photos figure')?.classList.add('image-missing');
       });
     });
   }
